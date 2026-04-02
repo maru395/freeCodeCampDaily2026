@@ -1,0 +1,15 @@
+def capitalize_fibonacci(s):
+    fibs = {0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233}
+    return "".join(c.upper() if i in fibs else c.lower() for i, c in enumerate(s))
+
+
+''' 
+if no predefined fibs list
+import math
+
+def is_fibonacci(n):
+    def is_perfect_square(x):
+        s = int(math.isqrt(x))
+        return s * s == x
+
+    return is_perfect_square(5 * n * n + 4) or is_perfect_square(5 * n * n - 4) '''
