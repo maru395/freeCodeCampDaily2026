@@ -1,0 +1,32 @@
+def solve_magic_square(grid):
+    # Locate the missing cell
+    mx = my = None
+    for i in range(3):
+        for j in range(3):
+            if grid[i][j] == 0:
+                mx, my = i, j
+
+    # Target sum comes from any row that has no zero
+    target = None
+    for i in range(3):
+        if i != mx:
+            target = sum(grid[i])
+            break
+
+    # Missing value = target minus the rest of its own row
+    missing = target - sum(grid[mx])
+    if missing <= 0:
+        return "impossible"
+
+    filled = [row[:] for row in grid]
+    filled[mx][my] = missing
+
+    # Verify all rows, columns, and both diagonals
+    lines = [row for row in filled]
+    lines += [[filled[r][c] for r in range(3)] for c in range(3)]
+    lines.append([filled[i][i] for i in range(3)])
+    lines.append([filled[i][2 - i] for i in range(3)])
+
+    if all(sum(line) == target for line in lines):
+        return missing
+    return "impossible"
