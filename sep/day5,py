@@ -1,0 +1,17 @@
+def is_valid_ipv4(ipv4):
+    octets = ipv4.split(".")
+    if len(octets) != 4:
+        return False
+
+    for o in octets:
+        # not digit check
+        if not o.isdigit():
+            return False
+        # leading 0 check
+        if len(o) > 1 and o[0] == "0":
+            return False
+        # range check
+        if int(o) > 255:
+            return False
+
+    return True
